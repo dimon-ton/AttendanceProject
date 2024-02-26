@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Attendance</title>
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+        .attendance-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+    /* Custom CSS to increase checkbox size */
+    input[type="checkbox"] {
+      width: 1.2em;
+      height: 1.2em;
+    }
+
+
+    </style>
+</head>
+<body>
+  <? var backLink = getScriptURL(); ?>
+<div class="container-sm">
+    
+
+    <div class="mb-4 d-flex justify-content-between">
+      <a class="btn btn-success" href="<?= backLink + '?page=home' ?>" role="button" target="_top"><i class="bi bi-backspace"></i>&nbsp;Back</a>
+      
+    </div>
+    <h2 class="text-center mb-4">เพิ่มข้อมูลสถิตินักเรียน</h2>
+
+    <form id="attendanceForm" class="attendance-form">
+
+      <div class="form-group">
+        <label for="attendanceDate">Attendance Date:</label>
+        <input type="date" id="attendanceDate" name="attendanceDate" class="form-control">
+      </div>
+
+      <hr> <!-- Divider line -->
+    
+
+        <? for (i=0; i < data.length; i++) { ?>
+
+      
+
+          <div class="form-group">
+              <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id=<?="student" + i ?> name=<?="student" + i ?> value=<?= data[i] ?>>
+                  <label class="form-check-label ml-2" for=<?="student" + i ?> ><?= data[i]; ?></label>
+              </div>
+          </div>
+
+
+        <? } ?>
+
+
+
+<!-- 
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="student2" name="student2" value="present">
+                <label class="form-check-label" for="student2">Student 2</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="student3" name="student3" value="present">
+                <label class="form-check-label" for="student3">Student 3</label>
+            </div>
+        </div> -->
+        <!-- Add more students as needed -->
+
+      <button type="submit" class="submit-btn">ส่งข้อมูล</button>
+        
+    </form>
+
+  
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- Bootstrap JS scripts -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form)
+
+        
+
+        // disable button when click submit
+        const submitButton = form.querySelector('.submit-btn')
+        
+
+
+        let attendance_arr = []
+
+        for (let pair of formData.entries()) {
+            // console.log(pair)
+            // console.log('typeof: ' + typeof(pair))
+            // console.log(pair[0] + ': ' + pair[1]);
+            // Here you can process the attendance data, such as sending it to a server or storage
+
+            console.log(pair)
+
+            attendance_arr.push(pair[1])
+        }
+
+
+        let checking_date = attendance_arr[0]
+        attendance_arr.shift()
+
+        if (checking_date != "") {
+
+          if (attendance_arr != 0) {
+          google.script.run.writeToSheet(checking_date, attendance_arr)
+          Swal.fire({
+            title: "Success",
+            text: "Data saved",
+            icon: "success"
+          }).then(function() {
+
+                submitButton.disabled = true
+
+                function redirectMyPage(url) {
+                  window.top.location.href = url + "?page=home"
+                }
+
+                google.script.run.withSuccessHandler(redirectMyPage).getScriptURL()               
+              
+          })
+        } else {
+          Swal.fire({
+            title: "ไม่มีเด็กมาโรงเรียนเลยใช่ไหม",
+            icon: "question",
+            showDenyButton: true,
+            confirmButtonText: "ใช่",
+            denyButtonText: "ไม่ใช่"
+
+          }).then ((result) => {
+              if (result.isConfirmed) {
+
+                let attendance_arr = ["no student"]
+
+                google.script.run.writeToSheet(checking_date, attendance_arr)
+                Swal.fire("data saved").then(() => {
+                    
+                    function redirectMyPage(url) {
+                      window.top.location.href = url + "?page=home"
+                    }
+
+                    google.script.run.withSuccessHandler(redirectMyPage).getScriptURL()               
+              
+                })
+              } else {
+                Swal.fire("data not saved", "", "info")
+              }
+
+            }         
+          )
+        }
+
+
+          //  var htmlContent = HtmlService.createHtmlOutputFromFile('test').getContent();
+          //  return htmlContent
+
+        } else {
+          Swal.fire("กรุณาใส่วันที่", "", "warning")
+        }
+
+
+        
+
+    });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
