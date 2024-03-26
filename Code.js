@@ -1,4 +1,5 @@
 // https://script.google.com/macros/s/AKfycbyrJWR7ieDyk3mGQUNVK3tWFHgW33nsm-KJBIUefP-o/dev
+// https://script.google.com/macros/s/AKfycbyrJWR7ieDyk3mGQUNVK3tWFHgW33nsm-KJBIUefP-o/dev?page=home
 function doGet(e) {
   
   Logger.log('print parameter: ' + e.parameter.id)
