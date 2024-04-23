@@ -209,7 +209,7 @@
                   </div>
                   <div>
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">แก้ไข</button>
+                    <button type="button" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">แก้ไข</button>
                   </div>
                 
 
@@ -218,7 +218,51 @@
               </div>
             </div>
 
+      <!-- data modal edit -->
 
+            <!-- Modal -->
+            <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">แก้ไข</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  
+                  <div class="modal-body">
+
+                    <form>
+                      <p class="id-text"></p>
+                      <div class="form-group">
+                        <label for="attendance-date" class="col-form-label"><b>วันที่:</b></label>
+                        <input type="date" class="form-control" id="editedDate">
+                        
+                      </div>
+                      <div class="form-group">
+                        <label for="students" class="col-form-label"><b>นักเรียนที่มา:</b></label>
+                        <textarea class="form-control" cols="20" placeholder="กรุณากรอกรายละเอียด"></textarea>
+                      </div>
+                    </form>
+
+
+                  </div>
+
+                  <div class="modal-footer d-flex justify-content-between">
+                  <!-- <div>
+                     <button type="button" id ="deleteRecord" class="btn btn-danger">Delete</button>   
+                  </div> -->
+                  <div>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                  </div>
+                
+
+                  </div>
+                </div>
+              </div>
+            </div>
 
       </tbody>
     </table>
@@ -397,6 +441,8 @@
 
       })
 
+      
+
 
       $('#select_all').on('click', function () {
             $('input[type="radio"][value="มา"]').prop('checked', true);
@@ -434,7 +480,7 @@
 
         let splitDate = attendanceDate.split("/")
 
-        // let normalDate = splitDate[2] - 543 + "-" + ("0" + splitDate[1]).slice(-2) + "-" + ("0" + splitDate[0]).slice(-2)
+        let replaceDate = splitDate[2] - 543 + "-" + ("0" + splitDate[1]).slice(-2) + "-" + ("0" + splitDate[0]).slice(-2)
 
         let normalDate = attendanceDate // ("0" + splitDate[0]).slice(-2) + "-" + ("0" + splitDate[1]).slice(-2) + "-" + (splitDate[2])
 
@@ -442,6 +488,12 @@
         modal.find('.id-text').text('id: ' + id)
         modal.find('p#students').text(students)
         modal.find('#attendance-date').html(normalDate)
+
+
+        // $("#edit").on('click', () => {
+          
+        //   $("#attendance-date").replaceWith(`<input type="date" class="form-control~" id="attendance-date" value="${replaceDate}">`)
+        // });
 
         $("#deleteRecord").off().on("click", function() {
           console.log("id before sweetalert: " + id)
