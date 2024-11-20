@@ -15,9 +15,117 @@
     <div id="loading">Loading...</div>
   </div>
 
+  <!-- data modal edit -->
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDataModalLabel">แก้ไขข้อมูลสถิตินักเรียน</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+
+            <div class="row mb-2 ml-2">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                ทางลัด
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" id="select_all">Select All</a>
+                <a class="dropdown-item" href="#" id="deselect_all">Deselect All</a>
+              </div>
+            </div>
+
+            <hr>
+
+            <form id="editStudent">
+
+
+              <div class="form-group">
+                <label for="checkDate">วันที่: </label>
+                <input type="date" class="form-control col-md-4" id="checkDate" name="checkDate">
+              </div>
+
+              <table class="table table-responsive-sm table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">รายชื่อ</th>
+                    <th scope="col" class="text-center">ลาป่วย</th>
+                    <th scope="col" class="text-center">ลากิจ</th>
+                    <th scope="col" class="text-center">ขาด</th>
+                    <th scope="col" class="text-center">มา</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <? var studentName = getNames(); ?>
+                  <? for (let i=0; i < 5; i++) { ?>
+                  <div class="form-check form-group">
+                    <tr>
+
+                      <th scope="row">
+                        <?= i + 1 ?>
+                      </th>
+                      <td>
+                        <?= studentName[i][1] ?>
+                      </td>
+
+                      <td class="text-center">
+                        <input type="radio" name=<?=studentName[i][0] ?> id="sickLeave" value="ลาป่วย">
+
+                      </td>
+
+                      <td class="text-center">
+                        <input type="radio" name=<?=studentName[i][0] ?> id="personalLeave" value="ลากิจ">
+
+                      </td>
+
+                      <td class="text-center">
+                        <input type="radio" name=<?=studentName[i][0] ?> id="absense" value="ขาด">
+
+                      </td>
+
+                      <td class="text-center">
+                        <input type="radio" name=<?=studentName[i][0] ?> id="present" value="มา">
+
+                      </td>
+                    </tr>
+                  </div>
+                  <? } ?>
+                </tbody>
+              </table>
+
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="editStudentBtn">Edit</button>
+          <button class="btn btn-primary" type="button" id="LoadingAddStdntBtn" style="display: none;" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            กำลังบันทึก...
+          </button>
+
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  
   <? var linkToMain = getScriptURL(); ?>
-
-
 
   <!-- Modal -->
   <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
@@ -224,7 +332,7 @@
                 <div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" id="edit" class="btn btn-primary" data-toggle="modal"
-                    data-target="#edit-modal">แก้ไข</button>
+                    data-target="#editData">แก้ไข</button>
                 </div>
 
 
@@ -233,83 +341,7 @@
           </div>
         </div>
 
-        <!-- data modal edit -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">แก้ไข</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div class="modal-body">
-
-                <form>
-                  <p class="id-text"></p>
-                  <div class="form-group">
-                    <label for="editedDate" class="col-form-label"><b>วันที่:</b></label>
-                    <input type="date" class="form-control" id="editedDate">
-
-                  </div>
-
-                  <div class="container">
-                    <!-- Scrollable Wrapper -->
-                    <div class="scroll-container">
-                      <!-- Header Row -->
-                      <div class="d-flex bg-info text-white p-2 align-items-center font-weight-bold">
-                        <div class="text-center" style="min-width: 50px;">No.</div>
-                        <div class="text-left" style="min-width: 200px;">รายชื่อ</div>
-                        <div class="text-center" style="min-width: 80px;">ลาป่วย</div>
-                        <div class="text-center" style="min-width: 80px;">ลากิจ</div>
-                        <div class="text-center" style="min-width: 80px;">ขาด</div>
-                        <div class="text-center" style="min-width: 80px;">มา</div>
-                      </div>
-                  
-                      <!-- Data Rows -->
-                      <? var studentName = getNames(); ?>
-                      <? for (let i = 0; i < studentName.length; i++) { ?>
-                      <div class="d-flex align-items-center p-2 border-bottom">
-                        <div class="text-center" style="min-width: 50px;"><?= i + 1 ?></div>
-                        <div class="text-left" style="min-width: 200px;"><?= studentName[i][1] ?></div>
-                        <div class="text-center" style="min-width: 80px;">
-                          <input class="form-check-input" type="radio" name=<?= studentName[i][0] ?> id="editedSickLeave" value="ลาป่วย">
-                        </div>
-                        <div class="text-center" style="min-width: 80px;">
-                          <input class="form-check-input" type="radio" name=<?= studentName[i][0] ?> id="editedPersonalLeave" value="ลากิจ">
-                        </div>
-                        <div class="text-center" style="min-width: 80px;">
-                          <input class="form-check-input" type="radio" name=<?= studentName[i][0] ?> id="editedAbsense" value="ขาด">
-                        </div>
-                        <div class="text-center" style="min-width: 80px;">
-                          <input class="form-check-input" type="radio" name=<?= studentName[i][0] ?> id="editedPresent" value="มา">
-                        </div>
-                      </div>
-                      <? } ?>
-                    </div>
-                  </div>
-
-                </form>
-              </div>
-
-              <div class="modal-footer d-flex justify-content-between">
-                <!-- <div>
-                     <button type="button" id ="deleteRecord" class="btn btn-danger">Delete</button>   
-                  </div> -->
-                <div>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" id="addStudentBtn">Submit</button>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-
+    
       </tbody>
     </table>
   </div>
@@ -565,6 +597,7 @@
       $('#edit').on("click", () => {
 
         $('#editedDate').val(replaceDate)
+        $('#detail').modal('hide')
 
       })
 

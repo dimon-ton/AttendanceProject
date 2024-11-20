@@ -11,33 +11,44 @@
         z-index: 9999;
       }
 
-      .scroll-container {
-      overflow-x: auto; /* Enables horizontal scrolling */
-      white-space: nowrap; /* Prevents content wrapping */
+      <!-- Custom CSS -->
+
+    .modal-body {
+      max-height: 70vh; /* Restrict the height of modal body for scrollability */
+      overflow-y: auto;
+    }
+  
+    .table-responsive {
+      overflow-x: auto; /* Enable horizontal scroll for the table */
+    }
+  
+    .form-check-input {
+      margin: 0 auto; /* Center align the radio buttons */
+    }
+  
+    th, td {
+      vertical-align: middle; /* Ensure content is vertically aligned */
     }
 
-      .form-check {
-      margin: 0; /* Removes unnecessary margin around radio buttons */
-      }
-
-      .form-check-input {
-        margin: 0 auto; /* Centers the radio buttons */
-        display: block; /* Ensures radio buttons stay inline */
-        width: 16px; /* Adjust size for consistency */
-        height: 16px;
-      }
+  .modal-body {
+    max-height: 70vh; /* Restrict the height of modal body for scrollability */
+    overflow-y: auto;
+  }
 
 
-      .border-bottom {
-        border-color: #dee2e6 !important; /* Subtle border color for row separation */
-      }
+  .table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll for the table */
+  }
 
-      .bg-info {
-        background-color: #17a2b8 !important; /* Ensure header has a consistent info background */
-      }
 
-      .d-flex {
-        flex-wrap: nowrap; /* Ensures elements stay in a single row */
-      }
+  .form-check-input {
+    margin: 0 auto; /* Center align the radio buttons */
+  }
+
+  th, td {
+    vertical-align: middle; /* Ensure content is vertically aligned */
+  }
+
+
 
 </style>
