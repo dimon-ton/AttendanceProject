@@ -1,0 +1,64 @@
+
+
+  <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="editDataModalLabel"><i class="bi bi-tools"></i>&nbsp;แก้ไขข้อมูลสถิตินักเรียน</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+
+            <form id="editStudent">
+
+
+              <div class="form-group">
+                <label for="checkDateEdit">วันที่: </label>
+                <input type="date" class="form-control col-md-4" id="checkDateEdit" name="checkDate">
+              </div>
+
+              <table class="table table-responsive-sm table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">รายชื่อ</th>
+                    <th scope="col" class="text-center">ลาป่วย</th>
+                    <th scope="col" class="text-center">ลากิจ</th>
+                    <th scope="col" class="text-center">ขาด</th>
+                    <th scope="col" class="text-center">มา</th>
+                  </tr>
+                </thead>
+
+                <tbody id="studentData">
+
+                </tbody>
+
+              </table>
+                      <!-- Loading Spinner -->
+              <div id="loading-spinner-table" class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status" style="display: block;">
+                    <span class="sr-only aria-hidden">Loading...</span>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="editStudentBtn">Edit</button>
+          <button class="btn btn-primary" type="button" id="LoadingAddStdntBtnEdit" style="display: none;" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            กำลังบันทึก...
+          </button>
+
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+

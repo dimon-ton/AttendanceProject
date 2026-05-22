@@ -15,132 +15,30 @@
     <div id="loading">Loading...</div>
   </div>
 
+  <?!= include("navbar"); ?>
+
+
   <!-- data modal edit -->
 
-  <!-- Modal -->
-
-  <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addDataModalLabel">แก้ไขข้อมูลสถิตินักเรียน</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <div class="container">
-
-            <div class="row mb-2 ml-2">
-              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                ทางลัด
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" id="select_all">Select All</a>
-                <a class="dropdown-item" href="#" id="deselect_all">Deselect All</a>
-              </div>
-            </div>
-
-            <hr>
-
-            <form id="editStudent">
-
-
-              <div class="form-group">
-                <label for="checkDate">วันที่: </label>
-                <input type="date" class="form-control col-md-4" id="checkDate" name="checkDate">
-              </div>
-
-              <table class="table table-responsive-sm table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">รายชื่อ</th>
-                    <th scope="col" class="text-center">ลาป่วย</th>
-                    <th scope="col" class="text-center">ลากิจ</th>
-                    <th scope="col" class="text-center">ขาด</th>
-                    <th scope="col" class="text-center">มา</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  <? var studentName = getNames(); ?>
-                  <? for (let i=0; i < 5; i++) { ?>
-                  <div class="form-check form-group">
-                    <tr>
-
-                      <th scope="row">
-                        <?= i + 1 ?>
-                      </th>
-                      <td>
-                        <?= studentName[i][1] ?>
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="sickLeave" value="ลาป่วย">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="personalLeave" value="ลากิจ">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="absense" value="ขาด">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="present" value="มา">
-
-                      </td>
-                    </tr>
-                  </div>
-                  <? } ?>
-                </tbody>
-              </table>
-
-
-          </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="editStudentBtn">Edit</button>
-          <button class="btn btn-primary" type="button" id="LoadingAddStdntBtn" style="display: none;" disabled>
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            กำลังบันทึก...
-          </button>
-
-        </div>
-
-        </form>
-
-      </div>
-    </div>
-  </div>
   
-  <? var linkToMain = getScriptURL(); ?>
+
+  <?!= include("edit-modal"); ?>
+
+  
+
 
   <!-- Modal -->
   <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addDataModalLabel">เพิ่มข้อมูลสถิตินักเรียน</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="bi bi-database-add"></i>&nbsp;เพิ่มข้อมูลสถิตินักเรียน</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-
-          <div class="container">
-
+          <div class="container-fluid">
             <div class="row mb-2 ml-2">
               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
@@ -153,75 +51,74 @@
             </div>
 
             <hr>
-
             <form id="addStudent">
 
-
-              <div class="form-group">
-                <label for="checkDate">วันที่: </label>
-                <input type="date" class="form-control col-md-4" id="checkDate" name="checkDate">
-              </div>
-
-              <table class="table table-responsive-sm table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">รายชื่อ</th>
-                    <th scope="col" class="text-center">ลาป่วย</th>
-                    <th scope="col" class="text-center">ลากิจ</th>
-                    <th scope="col" class="text-center">ขาด</th>
-                    <th scope="col" class="text-center">มา</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  <? var studentName = getNames(); ?>
-                  <? for (let i=0; i < 5; i++) { ?>
-                  <div class="form-check form-group">
-                    <tr>
-
-                      <th scope="row">
-                        <?= i + 1 ?>
-                      </th>
-                      <td>
-                        <?= studentName[i][1] ?>
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="sickLeave" value="ลาป่วย">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="personalLeave" value="ลากิจ">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="absense" value="ขาด">
-
-                      </td>
-
-                      <td class="text-center">
-                        <input type="radio" name=<?=studentName[i][0] ?> id="present" value="มา">
-
-                      </td>
-                    </tr>
-                  </div>
-                  <? } ?>
-                </tbody>
-              </table>
-
-
+            <div class="form-group row align-items-center">
+                <label for="checkDate" class="col-form-label font-weight-bold ml-4">วันที่:</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" id="checkDate" name="checkDate">
+                </div>
+            </div>
+     
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover shadow-sm rounded bg-white" style="min-width: 100px;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">รายชื่อ</th>
+                        <th scope="col" class="text-center">ลาป่วย</th>
+                        <th scope="col" class="text-center">ลากิจ</th>
+                        <th scope="col" class="text-center">ขาด</th>
+                        <th scope="col" class="text-center">มา</th>
+                      </tr>
+                    </thead>
+    
+                    <tbody>
+    
+                      <? var studentName = getNames(); ?>
+                      <? for (let i=0; i < studentName.length; i++) { ?>
+                      <div class="form-check form-group">
+                        <tr>
+    
+                          <th scope="row" class="text-center">
+                            <?= i + 1 ?>
+                          </th>
+                          <td>
+                            <?= studentName[i][1] ?>
+                          </td>
+    
+                          <td class="text-center">
+                            <input type="radio" name=<?=studentName[i][0] ?> id="sickLeave" value="ลาป่วย">
+    
+                          </td>
+    
+                          <td class="text-center">
+                            <input type="radio" name=<?=studentName[i][0] ?> id="personalLeave" value="ลากิจ">
+    
+                          </td>
+    
+                          <td class="text-center">
+                            <input type="radio" name=<?=studentName[i][0] ?> id="absense" value="ขาด">
+    
+                          </td>
+    
+                          <td class="text-center">
+                            <input type="radio" name=<?=studentName[i][0] ?> id="present" value="มา">
+    
+                          </td>
+                        </tr>
+                      </div>
+                      <? } ?>
+                    </tbody>
+                  </table>
+                </div>
           </div>
-
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="addStudentBtn">Submit</button>
-          <button class="btn btn-primary" type="button" id="LoadingAddStdntBtn" style="display: none;" disabled>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success rounded-pill" id="addStudentBtn"><i class="bi bi-check-circle"></i> Submit</button>
+          <button class="btn btn-secondary rounded-pill" type="button" id="LoadingAddStdntBtn" style="display: none;" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             กำลังบันทึก...
           </button>
@@ -237,113 +134,153 @@
 
   <!-- generate table -->
 
-  <div class="container mt-4">
-
+  <div class="container-fluid mt-4">
 
     <div class="row mb-4">
-      <!-- <div class="col">
 
-        <a href="<?= linkToMain ?>" target="_top" class="btn btn-primary btn-lg active mt-4" role="button" aria-pressed="true"><i class="bi bi-database-add"></i>&nbsp;เพิ่มข้อมูล</a>
+        <div class="col col-lg-10 d-flex flex-row-reverse">
 
-      </div> -->
-      <div class="col d-flex flex-row-reverse">
-
-        <a data-toggle="modal" data-target="#addData" target="_top" class="btn btn-info btn-lg active mt-4"
-          role="button" aria-pressed="true"><i class="bi bi-database-add"></i>&nbsp;เพิ่มข้อมูล</a>
-
-        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Launch demo modal
-        </button> -->
-      </div>
+          <a data-toggle="modal" data-target="#addData" class="btn btn-success btn-lg shadow rounded-pill px-4 py-2" role="button">
+            <i class="bi bi-database-add"></i>&nbsp;เพิ่มข้อมูล
+          </a>
+  
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+          </button> -->
+        </div>
+     
     </div>
 
+    <div class="row text-center">
+      <div class="col-12 col-lg-8 mx-auto">
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover shadow-sm rounded bg-white" id="student-table">
+
+            <? if (data.length != 0) { ?>
+      
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="text-center">วันที่</th>
+                <th scope="col">จำนวนนักเรียนที่มา</th>
+                <th scope="col">จำนวนนักเรียนที่ขาด</th>
+                <th scope="col">จำนวนนักเรียนที่ลากิจ</th>
+                <th scope="col">จำนวนนักเรียนที่ลาป่วย</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+      
+              <? for (i=0; i < data.length; i++) { ?>
+                  <tr>
+                    <th scope="row" style="width: 180px;"><?= data[i].date ?></th>
+                    <td class="text-center" style="width: 140px;"><?= data[i].attendance.length ?></td>
+                    <td class="text-center" style="width: 140px;"><?= data[i].absent.length ?></td>
+                    <td class="text-center" style="width: 140px;"><?= data[i].personal_leave.length ?></td>
+                    <td class="text-center" style="width: 140px;"><?= data[i].sick_leave.length ?></td>
+                    <td class="text-center" style="width: 140px;">
+                      <button 
+                        type="button" 
+                        class="btn btn-info rounded-pill px-4 py-2" 
+                        data-toggle="modal" 
+                        data-target="#detail"
+                        data-id="<?= data[i].ID ?>" 
+                        data-date="<?= data[i].date ?>" 
+                        data-attendance="<?= data[i].attendance.join(', ') ?>" 
+                        data-absent="<?= data[i].absent.join(', ') ?>" 
+                        data-sick="<?= data[i].sick_leave.join(', ') ?>" 
+                        data-personal="<?= data[i].personal_leave.join(', ') ?>"
+                      >
+                        detail
+                      </button>
+                    </td>
+                  </tr>
+      
+              <? } ?>
+      
+            <? } ?>
+      
+      
+      
+              <!-- data modal detail -->
+      
+              <!-- Modal -->
+              <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                      <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-file-text"></i>&nbsp;รายละเอียด</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+      
+                    <div class="modal-body">
+      
+                      <form>
+                        <div class="col text-left">
+                          <p class="id-text"></p>
+                        <div class="form-group">
+                          <label for="attendance-date" class="col-form-label"><b>วันที่:</b></label>
+                          <p id="attendance-date"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="attendance-detail" class="col-form-label"><b>นักเรียนที่มา:</b></label>
+                          <p id="attendance-detail"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="absent-detail" class="col-form-label"><b>นักเรียนที่ขาด:</b></label>
+                          <p id="absent-detail"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="personal-leave-detail" class="col-form-label"><b>นักเรียนที่ลากิจ:</b></label>
+                          <p id="personal-leave-detail"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="sick-leave-detail" class="col-form-label"><b>นักเรียนที่ลาป่วย:</b></label>
+                          <p id="sick-leave-detail"></p>
+                        </div>
 
 
-    <table class="table table-bordered table-hover" id="student-table">
-
-      <? if (data.length != 0) { ?>
-
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" class="text-center">Date</th>
-          <th scope="col">นักเรียนที่มา</th>
-          <th scope="col">#</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <? for (i=0; i < data.length; i++) { ?>
-        <tr>
-          <th scope="row">
-            <?= data[i][1] ?>
-          </th>
-          <td>
-            <?= data[i][2] ?>
-          </td>
-          <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#detail"
-              data-id="<?= data[i][0] ?>" data-date="<?= data[i][1] ?>" data-student="<?= data[i][2] ?>">detail</button>
-          </td>
-
-
-        </tr>
-
-        <? } ?>
-
-        <? } ?>
 
 
 
-        <!-- data modal detail -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">รายละเอียด</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div class="modal-body">
-
-                <form>
-                  <p class="id-text"></p>
-                  <div class="form-group">
-                    <label for="attendance-date" class="col-form-label"><b>วันที่:</b></label>
-                    <p id="attendance-date"></p>
-
-
+                        </div>
+                        
+                      </form>
+      
+      
+                    </div>
+      
+                    <div class="modal-footer d-flex justify-content-between">
+                      <div>
+                        <button type="button" id="deleteRecord" class="btn btn-danger">Delete</button>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="edit" class="btn btn-primary" data-toggle="modal"
+                          data-target="#editData">แก้ไข</button>
+                      </div>
+      
+      
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="students" class="col-form-label"><b>นักเรียนที่มา:</b></label>
-                    <p id="students"></p>
-                  </div>
-                </form>
-
-
-              </div>
-
-              <div class="modal-footer d-flex justify-content-between">
-                <div>
-                  <button type="button" id="deleteRecord" class="btn btn-danger">Delete</button>
                 </div>
-                <div>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" id="edit" class="btn btn-primary" data-toggle="modal"
-                    data-target="#editData">แก้ไข</button>
-                </div>
-
-
               </div>
-            </div>
-          </div>
+      
+          
+            </tbody>
+          </table>
+          
         </div>
 
     
-      </tbody>
-    </table>
+      </div>
+
+
+    </div>
+
+    
   </div>
 
 
@@ -360,46 +297,85 @@
 
   <script>
 
-    // set current date to the date input in adding table dialog box
-    var today = new Date();
-
-    $("#checkDate").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
-
-    // ---------------------------------------------------------------------------------------------------
-
-
-
     // when click submit button to add data I want to make AJAX in add data page
-
-
     function addAJAX(obj_data) {
 
-      obj_data = obj_data[0];
+      // check date duplicated
+      if (obj_data == 'date duplicated') {
+
+          Swal.fire({
+            title: "เกิดข้อผิดพลาด",
+            text: "วันที่ซ้ำ กรุณาเปลี่ยนวันที่ใหม่",
+            icon: "error"
+          });
+
+          $("#addStudentBtn").show();
+          $("#LoadingAddStdntBtn").hide();
+          $("#overlay").hide();
+          return
+      }
+
+
+      data_obj = obj_data[0];
+      console.log('typeof data_obj: ' + typeof data_obj)
+
+      console.log('obj_data: ' + JSON.stringify(data_obj, null, 2))
+
+      
 
 
       appended_row = `<tr>
-              <th scope="row">${obj_data[1]}</th>
-              <td>${obj_data[2]}</td>
-              <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#detail" data-id="${obj_data[0]}" data-date="${obj_data[1]}" data-student="${obj_data[2]}">detail</button></td>
-
-            </tr>`
-
+                    <th scope="row">${data_obj.date}</th>
+                    <td class="text-center" style="width: 140px;">${data_obj.attendance.length}</td>
+                    <td class="text-center" style="width: 140px;">${data_obj.absent.length}</td>
+                    <td class="text-center" style="width: 140px;">${data_obj.personal_leave.length}</td>
+                    <td class="text-center" style="width: 140px;">${data_obj.sick_leave.length}</td>
+                    <td class="text-center" style="width: 140px;">
+                      <button 
+                        type="button" 
+                        class="btn btn-info rounded-pill px-4 py-2" 
+                        data-toggle="modal" 
+                        data-target="#detail"
+                        data-id="${data_obj.ID}" 
+                        data-date="${data_obj.date}" 
+                        data-attendance="${data_obj.attendance?.join(', ') || ''}" 
+                        data-absent="${data_obj.absent?.join(', ') || ''}" 
+                        data-sick="${data_obj.sick_leave?.join(', ') || ''}" 
+                        data-personal="${data_obj.personal_leave?.join(', ') || ''}"
+                      >
+                        detail
+                      </button>
+                  </td>
+                  </tr>`
 
        // Check if the table has any rows
       if ($('#student-table tbody > tr').length > 0) {
+          
         // Insert before the first row if rows exist
         $('#student-table tbody > tr').eq(0).before(appended_row);
+
       } else {
-        header = `
-          <tr>
-            <th scope="col" class="text-center">Date</th>
-            <th scope="col">นักเรียนที่มา</th>
-            <th scope="col">#</th>
-          </tr>
+        header = `   
+            <tr>
+                <th scope="col" class="text-center">วันที่</th>
+                <th scope="col">จำนวนนักเรียนที่มา</th>
+                <th scope="col">จำนวนนักเรียนที่ขาด</th>
+                <th scope="col">จำนวนนักเรียนที่ลากิจ</th>
+                <th scope="col">จำนวนนักเรียนที่ลาป่วย</th>
+                <th scope="col">#</th>
+              </tr>
         `
-        $('#student-table thead').append(header)
+        
+        let thead = $('<thead class="thead-light"></thead>');
+        thead.append(header)
+
+        $('#student-table').append(thead);
         // Append as the first row if the table is empty
-        $('#student-table tbody').append(appended_row);
+
+        let tbody = $('<tbody></tbody>'); // create tbody before append row of data
+        tbody.append(appended_row);
+
+        $('#student-table').append(tbody);
       }
 
 
@@ -428,8 +404,6 @@
 
     }
 
-
-
     let absentMsg;
     let checkDate;
     let data_obj = {};
@@ -441,11 +415,14 @@
 
       let fire_obj = {
         title: "ตรวจสอบข้อมูลต่อไปนี้ให้ถูกต้อง",
+        icon: "info",
         showDenyButton: true,
         showConfirmButton: true,
         confirmButtonText: "ถูกต้อง",
         denyButtonText: "ยกเลิก",
-        html: '<h4 style="text-align: left;">รายชื่อนักเรียนที่ขาด: </h4><br>' + absentMsg
+        html: '<h4 style="text-align: left;">รายชื่อนักเรียนที่ขาด: </h4><br>' + absentMsg,
+        allowOutsideClick: false,
+        allowEscapeKey: false 
 
       };
 
@@ -478,7 +455,6 @@
     }
 
 
-
     function getData(e) {
       e.preventDefault()
 
@@ -493,6 +469,8 @@
 
 
       for (let pair of formData.entries()) {
+
+        console.log(pair)
 
         if (pair[0] == 'checkDate') {
           checkDate = pair[1]
@@ -523,8 +501,16 @@
       return data_obj
     }
 
+ 
 
     $("#addStudent").on('submit', (e) => {
+
+    // set current date to the date input in adding table dialog box
+    // var today = new Date();
+
+    // $("#checkDate").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+
+    // ---------------------------------------------------------------------------------------------------
 
 
       $("#overlay").show();
@@ -537,44 +523,35 @@
 
       google.script.run.withSuccessHandler(IdtoNamesHtml).idsToNames(data_obj['absent'].join(', '));
 
+
     })
 
 
-
-
+    
     $('#select_all').on('click', function () {
-      $('input[type="radio"][value="มา"]').prop('checked', true);
-    });
+            $('input[type="radio"][value="มา"]').prop('checked', true);
+      });
 
 
     $('#deselect_all').on('click', function () {
-      $('input[type="radio"][value="มา"]').prop('checked', false);
-    });
+            $('input[type="radio"][value="มา"]').prop('checked', false);
+      });
 
 
-    $("#detail").on('show.bs.modal', function (event) {
+    $("#detail").off().on('show.bs.modal', function (event) {
+
       var button = $(event.relatedTarget)
       let id = button.data('id')
-      var students = button.data('student')
       var attendanceDate = button.data('date')
-
-      var deletedRowNumber = 0
-      // the order of array
-      function getDeletedRow(arrData) {
-        arrData.forEach((item, index) => {
-          if (item[0] == id) {
-            deletedRowNumber = index
-
-          }
-        })
-      }
-
-      google.script.run.withSuccessHandler(getDeletedRow).checkingTable()
+      var attendance = button.data('attendance')
+      var absent = button.data('absent')
+      var sick = button.data('sick')
+      var personal = button.data('personal')
 
 
+      let rowTableMain = button.closest('tr');
+      let rowTableNumber = rowTableMain.index();
 
-      console.log("id: " + id)
-      console.log("type id: " + typeof (id))
 
       let splitDate = attendanceDate.split("/")
 
@@ -584,8 +561,11 @@
 
       var modal = $(this)
       modal.find('.id-text').text('id: ' + id)
-      modal.find('p#students').text(students)
       modal.find('#attendance-date').html(normalDate)
+      modal.find('p#attendance-detail').text(attendance)
+      modal.find('p#absent-detail').text(absent)
+      modal.find('p#personal-leave-detail').text(personal)
+      modal.find('p#sick-leave-detail').text(sick)
 
 
       // $("#edit").on('click', () => {
@@ -594,16 +574,129 @@
       // });
 
       // when edit button is clicked I want to get the date and value of students
-      $('#edit').on("click", () => {
+      $('#edit').off().on("click", () => {
+        
 
-        $('#editedDate').val(replaceDate)
+        $('#overlay').show()
+        $('#loading-spinner-table div').show();
         $('#detail').modal('hide')
+
+
+         // Clear the tbody when closing the modal
+        const tbody = document.getElementById("studentData");
+        tbody.innerHTML = '';  // Clears the table content
+
+        function tickEditingPage(data_obj) {
+          $('#overlay').hide();
+
+          // when I get the data from the backend I want to convert the date format from Buddhist to Christian
+          let edit_date = data_obj.date;
+          let [day, month, buddhist_year] = edit_date.split("/").map(Number);
+
+          const christian_year = buddhist_year - 543;
+          const christian_date = `${christian_year}-${("0" + month).slice(-2)}-${("0" + day).slice(-2)}`;
+          
+          $('#checkDateEdit').val(christian_date) // set date to input field in edit dialog box
+
+          
+          google.script.run.withSuccessHandler((studentData) => {
+          const tbody = document.getElementById("studentData");
+          studentData.forEach((student, index) => {
+           
+            tbody.innerHTML += `
+              <tr>
+                <th scope="row">${index + 1}</th>
+                <td>${student[1]}</td>
+                <td class="text-center"><input type="radio" id="sickLeaveEdit-${student[0]}" name="${student[0]}" value="ลาป่วย"></td>
+                <td class="text-center"><input type="radio" id="personalLeaveEdit-${student[0]}" name="${student[0]}" value="ลากิจ"></td>
+                <td class="text-center"><input type="radio" id="absenseEdit-${student[0]}" name="${student[0]}" value="ขาด"></td>
+                <td class="text-center"><input type="radio" id="presentEdit-${student[0]}" name="${student[0]}" value="มา"></td>
+              </tr>`;
+          });
+
+
+          let attendance_arr = data_obj.attendances
+          let absent_arr = data_obj.absents
+          let sick_leave_arr = data_obj.sick_leaves
+          let personal_leave_arr = data_obj.personal_leaves
+
+          
+    
+              if (attendance_arr != '') {
+                for (let item of attendance_arr) { 
+                $(`#presentEdit-${item}`).prop('checked', true)
+              }
+              }
+
+              if (absent_arr != '') {
+                  for (let item of absent_arr) {
+                  $(`#absenseEdit-${item}`).prop('checked', true)
+                }
+              }
+
+              if (sick_leave_arr != '') {
+                for (let item of sick_leave_arr) {
+                  $(`#sickLeaveEdit-${item}`).prop('checked', true)
+                }
+              }
+      
+              if (personal_leave_arr != '') {
+                for (let item of personal_leave_arr) {
+                  $(`#personalLeaveEdit-${item}`).prop('checked', true)
+                }
+              }
+
+
+
+        $('#loading-spinner-table div').hide();
+          
+        }).getNames();
+
+        }
+
+
+        google.script.run.withSuccessHandler(tickEditingPage).filterTranByID(id)
+
+
+        // click radio button on edit page
+        // let sick = 'sickLeaveEdit'
+        // let number = '1622'
+        // $(`#${sick}-${number}`).prop("checked", true)
+
+        
+        $(document).on('click', '#editStudentBtn', (e) => {
+         e.preventDefault();
+
+         $('#overlay').show();
+         $('#editStudentBtn').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> กำลังแก้ไข...');
+        //  $("#LoadingAddStdntBtnEdit").show();
+        let student_obj = {};
+
+          let dateEdit = $('#editData input[name="checkDate"]').val();
+          student_obj['checkDateEdit'] = dateEdit;
+
+         google.script.run.withSuccessHandler((studentData) => {
+          $('#overlay').hide();
+          $('#editStudentBtn').html("Edit")
+
+          studentData.forEach((student, index) => {
+
+              let data = $(`#editData input[name="${student[0]}"]:checked`).val();
+              student_obj[student[0]] = data;
+          });
+
+          google.script.run.editRecord(id, student_obj)
+
+ 
+         }).getNames()
+ 
+       
+      });
 
       })
 
 
       $("#deleteRecord").off().on("click", function () {
-        console.log("id before sweetalert: " + id)
 
         Swal.fire({
           title: "Delete Alert",
@@ -611,7 +704,9 @@
           icon: "question",
           showDenyButton: true,
           confirmButtonText: "Yes",
-          denyButtonText: "No"
+          denyButtonText: "No",
+          allowOutsideClick: false,
+          allowEscapeKey: false
         }).then((result) => {
           console.log('result status: ' + result.isConfirmed)
           if (result.isConfirmed) {
@@ -625,7 +720,7 @@
               $('#detail').modal('hide')
 
 
-              $('#student-table tbody > tr').eq(deletedRowNumber).remove()
+              $('#student-table tbody > tr').eq(rowTableNumber).remove()
 
               // check if the checkingTable array is zero
 
@@ -665,13 +760,9 @@
             })
           }
         })
-
-
-
       })
-
-
     })
+
 
   </script>
 
